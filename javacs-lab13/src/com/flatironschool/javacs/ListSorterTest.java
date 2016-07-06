@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.flatironschool.javacs;
 
@@ -35,8 +35,22 @@ public class ListSorterTest {
 				return n.compareTo(m);
 			}
 		};
-		
+
 		sorter = new ListSorter<Integer>();
+	}
+
+	@Test
+	public void testLSDRadixSort() {
+		String[] arr = new String [] {"aab", "aaa", "lop", "bbf", "bbd", "abc"};
+		ListSorter<String> stringSorter = new ListSorter<>();
+		stringSorter.LSDradixSort(arr, 3);
+		assertThat(arr.length, is(6));
+		assertThat(arr[0], is("aaa"));
+		assertThat(arr[1], is("aab"));
+		assertThat(arr[2], is("abc"));
+		assertThat(arr[3], is("bbd"));
+		assertThat(arr[4], is("bbf"));
+		assertThat(arr[5], is("lop"));
 	}
 
 	/**
@@ -50,8 +64,8 @@ public class ListSorterTest {
 	}
 
 	/**
-	 * @param list 
-	 * 
+	 * @param list
+	 *
 	 */
 	private void isSorted(List<Integer> list) {
 		assertThat(list.size(), is(5));
@@ -80,6 +94,11 @@ public class ListSorterTest {
 		List<Integer> list = new ArrayList<Integer>(Arrays.asList(3, 5, 1, 4, 2));
 		List<Integer> sorted = sorter.mergeSort(list, comparator);
 		isSorted(sorted);
+
+		//Base case test
+		List<Integer> secondList = new ArrayList<>(Arrays.asList(6));
+		List<Integer> secondSorted = sorter.mergeSort(secondList, comparator);
+		assertThat(secondSorted.get(0), is(6));
 	}
 
 	/**
